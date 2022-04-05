@@ -24,7 +24,7 @@ class RekapDataProdukController extends Controller
         //$produk = Produk::all();
 
         $data_produk_harian = DataProdukHarian::groupBy('produk_varian');
-        dd($data_produk_harian);
+        dd($data_produk_harian);//farid write here
         // foreach ($data_produk_harian as $ph) {a
         //     // dd($ph->produk_varian->produk);
         //     $nama = $ph->produk_varian->produk->nama_produk;
