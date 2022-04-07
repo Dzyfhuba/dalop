@@ -4,6 +4,7 @@ use App\Http\Controllers\ContohController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CobaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -26,6 +27,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::group(['prefix'=>'dashboard'],function(){
+        Route::get('/produk',DashboardController::class,'produk')->name('dashboard.produk');
+    });
 
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('user');
