@@ -9,5 +9,5 @@
 
     <!-- Bootstrap -->
     @include('_includes.css')
-    
-  </head>
+
+</head>
