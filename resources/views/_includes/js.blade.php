@@ -7,7 +7,7 @@
 <!-- NProgress -->
 <script src="{{ asset('template/vendors/nprogress/nprogress.js')}}"></script>
 <!-- Chart.js -->
-<script src="{{ asset('template/vendors/Chart.js/dist/Chart.min.js')}}"></script>
+{{-- <script src="{{ asset('template/vendors/Chart.js/dist/Chart.min.js')}}"></script> --}}
 <!-- gauge.js -->
 <script src="{{ asset('template/vendors/gauge.js/dist/gauge.min.js')}}"></script>
 <!-- bootstrap-progressbar -->
@@ -34,9 +34,9 @@
 <script src="{{ asset('template/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js')}}"></script>
 <!-- bootstrap-daterangepicker -->
 <script src="{{ asset('template/vendors/moment/min/moment.min.js')}}"></script>
-<script src="{{ asset('template/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+{{-- <script src="{{ asset('template/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script> --}}
 
 <!-- Custom Theme Scripts -->
-<script src="{{ asset('template/build/js/custom.js')}}"></script>
+{{-- <script src="{{ asset('template/build/js/custom.js')}}"></script> --}}
 
 

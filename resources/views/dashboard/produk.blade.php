@@ -2,7 +2,7 @@
 
 
 @section('head')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="{{ asset('js/chart.min.js') }}"></script>
 @endsection
 
 
@@ -14,23 +14,24 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="dashboard_graph">
 
-                    <div class="row x_title">
+                    <div class="row x_title d-flex">
                         <div class="col-md-6">
                             <h3>Network Activities <small>Graph title sub-title</small></h3>
                         </div>
-                        <div class="col-md-6">
-                            <div id="reportrange" class="pull-right"
-                                style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <select name="tahun" id="">
+                            @for ($i = 2020; $i < now()->year+1; $i++)
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endfor
+
+                        </select>
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         {{-- <div id="chart_plot_01" class="demo-placeholder"></div> --}}
                         <div>
-                            <canvas id="myChart" height="300px"></canvas>
+                            <canvas id="myChart" height="350px"></canvas>
                         </div>
                     </div>
 
@@ -74,78 +75,62 @@
             '#8549ba'
         ];
 
+        let lb = [];
+        let dtset = @json($produk_varian_pertahun)
+
+        let tt = {};
+
+        dtset.forEach((ee, iidx) => {
+
+            if (tt[ee.stack]) {
+                ee.data.forEach((i, idx) => {
+                    tt[ee.stack][idx] += i;
+                })
+            } else {
+                tt[ee.stack] = ee.data;
+            }
+
+        })
+        console.log(tt);
+
+        labels.forEach((l, idx) => {
+            let nil = 0;
+            if (tt['nilai_realisasi'][idx] != 0 && tt['nilai_rencana'][idx] != 0) {
+                nil = (tt['nilai_realisasi'][idx] * 100) / tt['nilai_rencana'][idx]
+            }
+            lb.push(l + " \n " + parseFloat(nil).toFixed(2) + "%")
+        });
+
+        console.log(lb);
+
 
         const data = {
-            labels: labels,
-            datasets: [{
-                    label: 'Dataset 1',
-                    data: [1, 2, 3, 4, 5],
-                    stack: 'm1',
-                    backgroundColor: '#4dc9f6',
-                }, {
-                    label: 'Dataset 2',
-                    data: [1, 2, 3, 4, 5],
-                    stack: 'm1',
-                    backgroundColor: COLORS[2],
-                },
-                {
-                    label: 'Dataset 3',
-                    data: [1, 2, 3, 4, 5],
-                    stack: 'm2',
-                    backgroundColor: COLORS[4],
-                }, {
-                    label: 'Dataset 4',
-                    data: [1, 2, 3, 4, 5],
-                    stack: 'm2',
-                    backgroundColor: COLORS[3],
-                },
-
-            ]
-
+            labels: lb,
+            datasets: dtset
         };
 
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: data,
+            legend: {
+                display: true,
+                labels: {
+                    padding: 50
+                }
+            },
             options: {
-                plugins: {
-                    datalabels: {
-                        formatter: (value, ctx) => {
-                            let datasets = ctx.chart.data
-                            .datasets; // Tried `.filter(ds => !ds._meta.hidden);` without success
-                            if (ctx.datasetIndex === datasets.length - 1) {
-                                let sum = 0;
-                                datasets.map(dataset => {
-                                    sum += dataset.data[ctx.dataIndex];
-                                });
-                                return sum.toLocaleString( /* ... */ );
-                            } else {
-                                return '';
-                            }
-
-                        },
-                        anchor: 'end',
-                        align: 'end'
-                    }
-                },
-
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    xAxes: [{
-                        stacked: true
-                    }],
-                    yAxes: [{
-                        stacked: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Task Count'
-                        }
-                    }]
+                    y: {
+                        grace: '5%'
+                    }
+
+
                 },
 
-            }
+            },
         });
     </script>
 @endsection
