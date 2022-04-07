@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataProdukHarian;
 use App\Models\Produk;
+use App\Models\ProdukVarian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,56 +17,34 @@ class RekapDataProdukController extends Controller
     }
     public function index(Request $request)
     {
+        // dd($request->all());
+        // dd('ad');
+        //SELECT SUM(nilai_realisasi),EXTRACT(MONTH FROM "2021-01-01") FROM data_produk_harians as a INNER JOIN produk_varians as b ON a.id_produk_varian=b.id INNER JOIN produks as c ON b.id_produk = c.id WHERE c.id = 1 AND b.id = 2;
+        if($request->has('tgl_awal')){
+            $produk = DataProdukHarian::select('nama_produk','nama_produk_varian','date','nilai_realisasi','nilai_rencana','persentase')
+            ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
+            ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
+            ->where('id_produk',$request->id_produk)
+            ->where('id_produk_varian',$request->id_produk_varian)
+            ->whereBetween('date', [$request->tgl_awal, $request->tgl_akhir])
+            ->get();
+        }
+        else{
+            $produk = DB::table("data_produk_harians")->select('nama_produk','nama_produk_varian','date','nilai_realisasi','nilai_rencana','persentase')
+            ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
+            ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
+            ->where('id_produk_varian',1)
+            ->get();
 
-        $n = [];
+        }
 
-        $y = 2021;
-        $id_p = 10;
-        //$produk = Produk::all();
+       
+           $a = Produk::select('id','nama_produk')->get();
+           $b = ProdukVarian::select('id','nama_produk_varian')->get();
 
-        $data_produk_harian = DataProdukHarian::groupBy('produk_varian');
-        dd($data_produk_harian);
-        // foreach ($data_produk_harian as $ph) {a
-        //     // dd($ph->produk_varian->produk);
-        //     $nama = $ph->produk_varian->produk->nama_produk;
-        //     if (isset($n[$nama][$ph->date]['nilai_rencana'])) {
-        //         $n[$nama][$ph->date]['nilai_rencana'] += $ph->nilai_rencana;
-        //         $n[$nama][$ph->date]['nilai_realisasi'] += $ph->nilai_realisasi;
-        //     }else{
-        //         $n[$nama][$ph->date]['nilai_rencana'] = $ph->nilai_rencana;
-        //         $n[$nama][$ph->date]['nilai_realisasi'] = $ph->nilai_realisasi;
-        //     }
-        // }
+        return view('rekap_data.index',compact('a','b'),[
+            'produk' => $produk,
+        ]);
 
-
-
-
-
-
-        // foreach ($produk as $pd){
-        //     foreach($pd->produk_varian as $pv){
-        //         foreach($pv->data_produk_harian as $ph){
-
-        //             if(isset($n[$pd->nama_produk][$ph->date]['nilai_rencana'])){
-        //                 // dd($ph->nilai_rencana,$ph->id);
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_rencana']+= $ph->nilai_rencana;
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_realisasi']+= $ph->nilai_realisasi;
-
-        //             }else{
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_rencana'] = $ph->nilai_rencana;
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_realisasi'] = $ph->nilai_realisasi;
-
-        //             }
-
-        //         }
-
-        //         //dd($pv->data_produk_harian->groupBy('date'));
-        //     }
-        // }
-
-
-        dd($n['Amoniak']);
-
-        return view('rekap_data.index');
     }
 }
