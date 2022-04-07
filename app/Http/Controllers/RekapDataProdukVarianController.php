@@ -44,13 +44,13 @@ class RekapDataProdukVarianController extends Controller
             ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
             ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
             ->select(
-                'produk_varians.nama_produk_varian as produk_varians',
+                'produk_varians.nama_produk_varian as produk_varian',
                 'produks.nama_produk as produk',
                 'date',
                 DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
                 DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
             )
-            ->groupBy('produk_varians')
+            ->groupBy('produk_varian')
             ->get();
 
 
@@ -58,13 +58,13 @@ class RekapDataProdukVarianController extends Controller
             ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
             ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
             ->select(
-                'produk_varians.nama_produk_varian as produk_varians',
+                'produk_varians.nama_produk_varian as produk_varian',
                 'produks.nama_produk as produk',
                 'date',
                 DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
                 DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
             )
-            ->groupBy('produk_varians')
+            ->groupBy('produk_varian')
             ->get();
 
         // dd($data_produk_bulanan);
