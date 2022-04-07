@@ -3,12 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataProdukHarian;
-<<<<<<< Updated upstream
-use App\Models\Produk;
-use App\Models\ProdukVarian;
-=======
 // use App\Models\Produk;
->>>>>>> Stashed changes
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

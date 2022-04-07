@@ -48,14 +48,8 @@
 
                                 </tbody>
                             </table>
-<<<<<<< Updated upstream
                             <input type="date" name="first_date" value="{{ request()->first_date ?? $first_date }}">
                             <input type="date" name="end_date" value="{{ request()->end_date ?? $end_date }}">
-=======
-                            <span>Tanggal </span>
-                            <input type="date" name="first_date" value="{{request()->first_date??$first_date}}">
-                            <input type="date" name="end_date" value="{{request()->end_date??$end_date}}">
->>>>>>> Stashed changes
                             <button>Cari</button>
                             <table class="table table-striped">
                                 <thead>
