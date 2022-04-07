@@ -109,11 +109,25 @@
             type: 'bar',
             data: data,
             options: {
-                legend: {
-                    "display": false
-                },
-                tooltips: {
-                    "enabled": false
+                plugins: {
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let datasets = ctx.chart.data
+                            .datasets; // Tried `.filter(ds => !ds._meta.hidden);` without success
+                            if (ctx.datasetIndex === datasets.length - 1) {
+                                let sum = 0;
+                                datasets.map(dataset => {
+                                    sum += dataset.data[ctx.dataIndex];
+                                });
+                                return sum.toLocaleString( /* ... */ );
+                            } else {
+                                return '';
+                            }
+
+                        },
+                        anchor: 'end',
+                        align: 'end'
+                    }
                 },
 
                 responsive: true,
@@ -130,23 +144,7 @@
                         }
                     }]
                 },
-                animation: {
-                    dauration: 0,
-                    onComplete: function() {
-                        var chartInstance = this.chart,
-                            ctx = chartInstance.ctx;
-                        ctx.textAlign = 'center';
-                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
-                        ctx.textBaseline = 'top';
-                        this.data.datasets.forEach(function(dataset, i) {
-                            var meta = chartInstance.controller.getDatasetMeta(i);
-                            meta.data.forEach(function(bar, index) {
-                                var data = dataset.data[index];
-                                ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                            });
-                        });
-                    },
-                }
+
             }
         });
     </script>
