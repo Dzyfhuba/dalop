@@ -19,53 +19,61 @@ class RekapDataProdukController extends Controller
 
         $n = [];
 
-        $y = 2021;
-        $id_p = 10;
+        //$y = 2021;
+        //$id_p = 10;
         //$produk = Produk::all();
 
-        $data_produk_harian = DataProdukHarian::groupBy('produk_varian');
-        dd($data_produk_harian);//farid write here
-        // foreach ($data_produk_harian as $ph) {a
-        //     // dd($ph->produk_varian->produk);
-        //     $nama = $ph->produk_varian->produk->nama_produk;
-        //     if (isset($n[$nama][$ph->date]['nilai_rencana'])) {
-        //         $n[$nama][$ph->date]['nilai_rencana'] += $ph->nilai_rencana;
-        //         $n[$nama][$ph->date]['nilai_realisasi'] += $ph->nilai_realisasi;
-        //     }else{
-        //         $n[$nama][$ph->date]['nilai_rencana'] = $ph->nilai_rencana;
-        //         $n[$nama][$ph->date]['nilai_realisasi'] = $ph->nilai_realisasi;
-        //     }
-        // }
+        if ($request->tanggal_harian) {
+            $date = $request->tanggal_harian;
+        } else {
+            $date = DataProdukHarian::orderBy('date', 'ASC')->limit(1)->first()->date;
+        }
+
+
+
+        if ($request->first_date) {
+            $first_date = $request->first_date;
+        } else {
+            $first_date = DataProdukHarian::orderBy('date', 'ASC')->limit(1)->first()->date;
+        }
+        if ($request->end_date) {
+            $end_date = $request->end_date;
+        } else {
+            $end_date = DataProdukHarian::orderBy('date', 'DESC')->limit(1)->first()->date;
+        }
 
 
 
 
+        $data_produk_harian = DataProdukHarian::where('date', '=', $date)
+            ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
+            ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
+            ->select(
+                'data_produk_harians.id as id',
+                'produks.nama_produk as produk',
+                'date',
+                DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
+                DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
+            )
+            ->groupBy('produk')
+            ->get();
 
 
-        // foreach ($produk as $pd){
-        //     foreach($pd->produk_varian as $pv){
-        //         foreach($pv->data_produk_harian as $ph){
+        $data_produk_bulanan = DataProdukHarian::whereBetween('date', [$first_date, $end_date])
+            ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
+            ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
+            ->select(
+                'data_produk_harians.id as id',
+                'produks.nama_produk as produk',
+                'date',
+                DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
+                DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
+            )
+            ->groupBy('produk')
+            ->get();
 
-        //             if(isset($n[$pd->nama_produk][$ph->date]['nilai_rencana'])){
-        //                 // dd($ph->nilai_rencana,$ph->id);
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_rencana']+= $ph->nilai_rencana;
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_realisasi']+= $ph->nilai_realisasi;
+        // dd($data_produk_bulanan);
 
-        //             }else{
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_rencana'] = $ph->nilai_rencana;
-        //                 $n[$pd->nama_produk][$ph->date]['nilai_realisasi'] = $ph->nilai_realisasi;
-
-        //             }
-
-        //         }
-
-        //         //dd($pv->data_produk_harian->groupBy('date'));
-        //     }
-        // }
-
-
-        dd($n['Amoniak']);
-
-        return view('rekap_data.index');
+        return view('rekap_data.index', compact('data_produk_harian', 'date','data_produk_bulanan','first_date','end_date'));
     }
 }
