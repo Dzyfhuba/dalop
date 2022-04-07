@@ -79,75 +79,74 @@
             labels: labels,
             datasets: [{
                     label: 'Dataset 1',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    stack: 'Stack 0',
+                    data: [1, 2, 3, 4, 5],
+                    stack: 'm1',
                     backgroundColor: '#4dc9f6',
                 }, {
                     label: 'Dataset 2',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    stack: 'Stack 0',
+                    data: [1, 2, 3, 4, 5],
+                    stack: 'm1',
                     backgroundColor: COLORS[2],
                 },
                 {
                     label: 'Dataset 3',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    stack: 'Stack 1',
+                    data: [1, 2, 3, 4, 5],
+                    stack: 'm2',
                     backgroundColor: COLORS[4],
                 }, {
                     label: 'Dataset 4',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    stack: 'Stack 1',
+                    data: [1, 2, 3, 4, 5],
+                    stack: 'm2',
                     backgroundColor: COLORS[3],
                 },
 
             ]
 
         };
-        // new Chart(document.getElementById("MyChart"), );
 
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
-            data: {
-                labels: [2017, 2018, 2019, 2020, 2021, 2022, 2023],
-                datasets: [{
-                    label: "Income - Base",
-                    type: "bar",
-                    stack: "Base",
-                    backgroundColor: "#eece01",
-                    data: [30, 31, 32, 33, 34, 35, 36],
-                }, {
-                    label: "Tax - Base",
-                    type: "bar",
-                    stack: "Base",
-                    backgroundColor: "#87d84d",
-                    data: [-15, -16, -17, -18, -19, -20, -21],
-                }, {
-                    label: "Income - Sensitivity",
-                    type: "bar",
-                    stack: "Sensitivity",
-                    backgroundColor: "#f8981f",
-                    data: [20, 21, 22, 23, 24, 25, 26],
-                }, {
-                    label: "Tax - Sensitivity",
-                    type: "bar",
-                    stack: "Sensitivity",
-                    backgroundColor: "#00b300",
-                    backgroundColorHover: "#3e95cd",
-                    data: [-10, -11, -12, -13, -14, -15, -16]
-                }]
-            },
+            data: data,
             options: {
+                legend: {
+                    "display": false
+                },
+                tooltips: {
+                    "enabled": false
+                },
+
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
-                        //stacked: true,
-                        stacked: true,
-                        
+                        stacked: true
                     }],
                     yAxes: [{
                         stacked: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Task Count'
+                        }
                     }]
                 },
+                animation: {
+                    dauration: 0,
+                    onComplete: function() {
+                        var chartInstance = this.chart,
+                            ctx = chartInstance.ctx;
+                        ctx.textAlign = 'center';
+                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                        ctx.textBaseline = 'top';
+                        this.data.datasets.forEach(function(dataset, i) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function(bar, index) {
+                                var data = dataset.data[index];
+                                ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                            });
+                        });
+                    },
+                }
             }
         });
     </script>
