@@ -77,6 +77,7 @@ class DashboardController extends Controller
             array_push($datasets, $dt);
         }
         $produk_varian_pertahun = $datasets;
+
         // dd($produk_varian_pertahun);
 
 

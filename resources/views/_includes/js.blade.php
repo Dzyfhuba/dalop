@@ -37,6 +37,6 @@
 {{-- <script src="{{ asset('template/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script> --}}
 
 <!-- Custom Theme Scripts -->
-{{-- <script src="{{ asset('template/build/js/custom.js')}}"></script> --}}
+<script src="{{ asset('template/build/js/custom.js')}}"></script>
 
 

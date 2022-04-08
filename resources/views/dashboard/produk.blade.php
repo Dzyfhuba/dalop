@@ -77,7 +77,7 @@
 
         let lb = [];
         let dtset = @json($produk_varian_pertahun)
-
+        
         let tt = {};
 
         dtset.forEach((ee, iidx) => {
@@ -91,7 +91,7 @@
             }
 
         })
-        console.log(tt);
+        // console.log(dtset);
 
         labels.forEach((l, idx) => {
             let nil = 0;
@@ -106,7 +106,7 @@
 
         const data = {
             labels: lb,
-            datasets: dtset
+            datasets: @json($produk_varian_pertahun)
         };
 
         var ctx = document.getElementById("myChart").getContext('2d');
