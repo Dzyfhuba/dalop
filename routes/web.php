@@ -27,6 +27,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function () {
 
+
+    Route::get('/logout',function(){
+        auth()->logout();
+        return redirect()->route('home');
+    });
+
     Route::group(['prefix'=>'dashboard'],function(){
         Route::get('/produk',[DashboardController::class,'produk'])->name('dashboard.produk');
     });

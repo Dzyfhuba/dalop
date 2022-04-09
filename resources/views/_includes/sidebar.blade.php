@@ -1,9 +1,9 @@
 <div class="left_col scroll-view">
-    <div class="navbar nav_title " style="border: 0; background-color:teal">
+    <div class="navbar nav_title " style="border: 0; background-color:white">
       <a href="index.html" class="site_title"> 
-        <img src="{{ asset('template/images/a.png') }}" width="auto" height="30" alt="..." class="img-circle ">
+        <img src="{{ asset('template/images/a.png') }}" width="auto" height="40" alt="..." class="img-circle ">
         
-        <span class="" style="color:rgb(36, 128, 0)">SIMONPRO</span></a>
+        <span class="" style="color:teal">SIMONPRO</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -72,7 +72,7 @@
       <a data-toggle="tooltip" data-placement="top" title="Lock">
         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
       </a>
-      <a data-toggle="tooltip" data-placement="top" title="Logout" href="/">
+      <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{route('logout')}}">
         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
       </a>
     </div>
