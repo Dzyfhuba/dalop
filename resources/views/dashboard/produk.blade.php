@@ -46,6 +46,7 @@
                             </select>
                             <button type="submit">Filter</button>
                         </form>
+                        <button onclick="print()">Cetak</button>
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -320,5 +321,7 @@
 
             },
         });
+
+        
     </script>
 @endsection
