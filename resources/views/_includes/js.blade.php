@@ -9,7 +9,7 @@
 <!-- Chart.js -->
 {{-- <script src="{{ asset('template/vendors/Chart.js/dist/Chart.min.js')}}"></script> --}}
 <!-- gauge.js -->
-<script src="{{ asset('template/vendors/gauge.js/dist/gauge.min.js')}}"></script>
+{{-- <script src="{{ asset('template/vendors/gauge.js/dist/gauge.min.js')}}"></script> --}}
 <!-- bootstrap-progressbar -->
 <script src="{{ asset('template/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
 <!-- iCheck -->
