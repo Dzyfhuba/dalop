@@ -3,20 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataProdukHarian;
+use App\Models\Produk;
 use App\Models\ProdukVarian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function produk()
+    
+    public function produk(Request $request)
     {
+        $produk = Produk::all();
 
-
-        $month = 1;
+        // $month = 1;
         $year = 2021;
         $produk_id = 1;
-
+        // Iki pean gawe inputan kabeh mas
+        if(isset($this->request)){
+            dd($this->request);
+        }
 
         $data = [];
 
@@ -76,12 +81,12 @@ class DashboardController extends Controller
             $dt['data'] = array_values($dt['data']);
             array_push($datasets, $dt);
         }
+
         $produk_varian_pertahun = $datasets;
 
         // dd($produk_varian_pertahun);
 
 
-
-        return view('dashboard.produk', compact('produk_varian_pertahun'));
+        return view('dashboard.produk', compact('produk_varian_pertahun', 'produk'));
     }
 }

@@ -12,7 +12,6 @@ class ProdukVarian extends Model
         'deskripsi',
         'id_pabrik',
         'id_produk',
-        
     ];
 
     use HasFactory;

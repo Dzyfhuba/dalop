@@ -15,11 +15,8 @@ class CobaController extends Controller
     }
 
     function save(Request $request){
-        // dd($request);
-
         Pabrik::create([
             'nama_pabrik'=>$request->nama_pabrik,
-            
         ]);
 
         return redirect()->back();

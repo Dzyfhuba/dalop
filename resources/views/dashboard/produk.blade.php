@@ -20,18 +20,31 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <select name="tahun" id="">
-                            @for ($i = 2020; $i < now()->year+1; $i++)
+                        <form action="" method="post">
+                            <select name="tahun" id="">
+                                @for ($i = 2020; $i < now()->year+1; $i++)
                                 <option value="{{$i}}">{{$i}}</option>
-                            @endfor
-
-                        </select>
+                                @endfor
+                            </select>
+                            <select name="id_produk">
+                                @foreach($produk as $p)
+                                <option value="{{$p['id']}}">{{$p['nama_produk'] }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit">Filter</button>
+                        </form>
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         {{-- <div id="chart_plot_01" class="demo-placeholder"></div> --}}
                         <div>
                             <canvas id="myChart" height="350px"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        {{-- <div id="chart_plot_01" class="demo-placeholder"></div> --}}
+                        <div>
+                            <canvas id="myChart1" height="350px"></canvas>
                         </div>
                     </div>
 
@@ -81,7 +94,6 @@
         let tt = {};
 
         dtset.forEach((ee, iidx) => {
-
             if (tt[ee.stack]) {
                 ee.data.forEach((i, idx) => {
                     tt[ee.stack][idx] += i;
@@ -126,11 +138,10 @@
                     y: {
                         grace: '5%'
                     }
-
-
                 },
 
             },
         });
+        
     </script>
 @endsection

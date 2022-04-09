@@ -10,7 +10,6 @@ class Produk extends Model
     protected $fillable = [
         'nama_produk',
         'deskripsi'
-        
     ];
 
     public function produk_varian(){
