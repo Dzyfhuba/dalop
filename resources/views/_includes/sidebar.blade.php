@@ -35,7 +35,7 @@
           </li>
           <li><a href="{{ route('user') }}"><i class='fa fa-laptop'></i></i> Data Pengguna</a>
           </li>
-          <li><a href="{{ route('pabrik') }}"><i class="fa fa-laptop"></i> Data Pabrik</a>
+          <li><a href="{{ route('pabrik') }}"><i class="fa fa-edit"></i> Data Pabrik</a>
           </li>
           <li><a href="{{ route('produk') }}"><i class="fa fa-laptop"></i> Data Produk</a>
           </li>
@@ -43,6 +43,9 @@
           </li>
           <li><a href="{{ route('dataprodukharian') }}"><i class="fa fa-laptop"></i> Data Produk Harian</a>
           </li>
+          <ul class="nav side-menu">
+           <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
           <li><a href="{{ route('rekapdataproduk') }}"><i class="fa fa-laptop"></i> Rekap Data Produk</a>
           </li>
           <li><a href="{{ route('rekapdataprodukvarian') }}"><i class="fa fa-laptop"></i> Rekap Data Produk Varian</a>
