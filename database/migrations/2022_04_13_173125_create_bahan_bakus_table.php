@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('nama_bahan_baku');
             $table->string('liquid');
-            $table->double('safety_stock');
-            $table->double('dead_stock');
-            $table->double('max');
+            $table->double('safety_stock')->nullable();
+            $table->double('dead_stock')->nullable();;
+            $table->double('max')->nullable();;
             $table->timestamps();
         });
     }

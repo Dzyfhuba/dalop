@@ -56,7 +56,7 @@
 
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="safety_stock" name="safety_stock" required="required" class="form-control col-md-7 col-xs-12"
+                                    <input type="number" id="safety_stock" name="safety_stock" class="form-control col-md-7 col-xs-12"
                                     value="{{ $bahan_baku->safety_stock ?? '' }}">
                                 </div>
                                 @if ($errors->has('safety_stock'))
@@ -68,7 +68,7 @@
 
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="dead_stock" name="dead_stock" required="required"class="form-control col-md-7 col-xs-12"
+                                    <input type="number" id="dead_stock" name="dead_stock" class="form-control col-md-7 col-xs-12"
                                     value="{{ $bahan_baku->dead_stock ?? '' }}">
                                 </div>
                                 @if ($errors->has('dead_stock'))
@@ -79,7 +79,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Max
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="max" name="max"required="required" class="form-control col-md-7 col-xs-12"
+                                    <input type="number" id="max" name="max" class="form-control col-md-7 col-xs-12"
                                     value="{{ $bahan_baku->max ?? '' }}">
                                 </div>
                                 @if ($errors->has('max'))

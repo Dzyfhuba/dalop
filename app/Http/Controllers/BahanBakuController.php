@@ -22,13 +22,11 @@ class BahanBakuController extends Controller
         $validated = $request->validate([
             'nama_bahan_baku' => 'required',
             'liquid' => 'required',
-            'safety_stock' => 'required',
-            'dead_stock' => 'required',
-            'max' => 'required',
+            
         ]);  
         
         // dd($validated);
-        BahanBaku::create($validated);
+        BahanBaku::create($request->all());
 
         return redirect()->route('bahan_baku');
     }
@@ -42,15 +40,13 @@ class BahanBakuController extends Controller
         $validated = $request->validate([
             'nama_bahan_baku' => 'required',
             'liquid' => 'required',
-            'safety_stock' => 'required',
-            'dead_stock' => 'required',
-            'max' => 'required',
+           
       
             
         ]);  
         // dd($request);
         $bahan_baku = BahanBaku::find($id);
-        $bahan_baku ->fill($validated);
+        $bahan_baku ->fill($request->all());
         // dd($validated);
         $bahan_baku->save();
 
