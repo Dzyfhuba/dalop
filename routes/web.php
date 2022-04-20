@@ -39,9 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [App\Http\Controllers\StokBahanBakuHarianController::class, 'index'])->name('stokbahanbakuharian');
         Route::get('/create', [App\Http\Controllers\StokBahanBakuHarianController::class, 'create'])->name('stokbahanbakuharian.create');
         Route::post('/create', [App\Http\Controllers\StokBahanBakuHarianController::class, 'store'])->name('stokbahanbakuharian.create');
-        Route::get('/edit/{id}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'edit'])->name('stokbahanbakuharian.edit');
-        Route::post('/edit/{id}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'update'])->name('stokbahanbakuharian.edit');
-        Route::get('/delete/{id}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'delete'])->name('stokbahanbakuharian.delete');
+        Route::get('/edit/{date}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'edit'])->name('stokbahanbakuharian.edit');
+        Route::post('/edit/{date}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'store'])->name('stokbahanbakuharian.edit');
+        Route::get('/delete/{date}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'delete'])->name('stokbahanbakuharian.delete');
     });
     Route::get('/logout', function () {
         auth()->logout();

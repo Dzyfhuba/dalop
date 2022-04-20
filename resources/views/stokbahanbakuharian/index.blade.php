@@ -20,15 +20,36 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nama Bahan Baku</th>
                                     <th>Date</th>
-                                    <th>Stok</th>
+                                    @foreach ($bahan_baku as $bbr)
+                                        <th>{{ $bbr->nama_bahan_baku }}</th>
+                                    @endforeach
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($stokbahanbakuharian as $item)
+                                @foreach ($bb as $i => $b)
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
+                                        <td>{{ $i }}</td>
+                                        @foreach ($bahan_baku as $bb)
+                                            <td>{{ $b[$bb->id] }}</td>
+                                        @endforeach
+
+                                        <td><a type="button" class="btn btn-warning btn-xs"
+                                                href={{ route('stokbahanbakuharian.edit', ['date' => $i]) }}>Edit <span
+                                                    class="glyphicon glyphicon-edit"></span></a>
+
+                                            <a type="button" class="btn btn-danger btn-xs"
+                                                href={{ route('stokbahanbakuharian.delete', ['date' => $i]) }}>Delete <span
+                                                    class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                {{-- @foreach ($stokbahanbakuharian as $item)
+                                    <tr>
+                                        <td scope="row">{{ $loop->iteration }}</td>
+
                                         <td>{{ $item->bahan_baku->nama_bahan_baku }}</td>
                                         <td>{{ $item->date }}</td>
                                         <td>{{ $item->stok }}</td>
@@ -41,16 +62,14 @@
                                         </td>
                                     </tr>
                                     
-                                @endforeach
-                                </table>
-                            </tbody>
+                                @endforeach --}}
+                        </table>
+                        </tbody>
 
-                          
-                        </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-        @endsection
-
-                        
+        </div>
+    </div>
+@endsection

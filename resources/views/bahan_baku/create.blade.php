@@ -31,18 +31,21 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div id="liquid" class="btn-group" data-toggle="buttons">
                                         <label
-                                            class="btn btn-default {{ isset($liquid->jenisbahanbaku) ? ($liquid->jenisbahanbaku == 'Liquid' ? 'active' : '') : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                            class="btn btn-default {{ isset($bahan_baku->liquid) ? ($bahan_baku->liquid == 'Liquid' ? 'active' : '') : '' }}"
+                                            data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                             <input type="radio" name="liquid" value="Liquid" required
-                                                {{ isset($liquid->jenisbahanbaku) ? ($liquid->jenisbahanbaku == 'Liquid' ? 'checked' : '') : '' }}>
+                                            {{ isset($bahan_baku->liquid) ? ($bahan_baku->liquid == 'Liquid' ? 'checked' : '') : '' }}>
                                             &nbsp;
                                             Liquid
                                             &nbsp;
                                         </label>
+
+
                                         <label
-                                            class="btn btn-default {{ isset($liquid->jenisbahanbaku) ? ($liquid->jenisbahanbaku == 'Non Liquid' ? 'active' : '') : '' }}" 
+                                            class="btn btn-default {{ isset($bahan_baku->liquid) ? ($bahan_baku->liquid == 'Non Liquid' ? 'active' : '') : '' }}"
                                             data-toggle-class="btn-default" data-toggle-passive-class="btn-default">
                                             <input type="radio" name="liquid" value="Non Liquid" required
-                                                {{ isset($liquid->jenisbahanbaku) ? ($liquid->jenisbahanbaku == 'Non Liquid' ? 'checked' : '') : '' }}>
+                                            {{ isset($bahan_baku->liquid) ? ($bahan_baku->liquid == 'Non Liquid' ? 'checked' : '') : '' }}>
                                             Non Liquid
                                         </label>
                                     </div>
@@ -56,8 +59,9 @@
 
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="safety_stock" name="safety_stock" class="form-control col-md-7 col-xs-12"
-                                    value="{{ $bahan_baku->safety_stock ?? '' }}">
+                                    <input type="number" id="safety_stock" name="safety_stock"
+                                        class="form-control col-md-7 col-xs-12"
+                                        value="{{ $bahan_baku->safety_stock ?? '' }}">
                                 </div>
                                 @if ($errors->has('safety_stock'))
                                     <div class="error">{{ $errors->first('safety_stock') }}</div>
@@ -68,8 +72,9 @@
 
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="dead_stock" name="dead_stock" class="form-control col-md-7 col-xs-12"
-                                    value="{{ $bahan_baku->dead_stock ?? '' }}">
+                                    <input type="number" id="dead_stock" name="dead_stock"
+                                        class="form-control col-md-7 col-xs-12"
+                                        value="{{ $bahan_baku->dead_stock ?? '' }}">
                                 </div>
                                 @if ($errors->has('dead_stock'))
                                     <div class="error">{{ $errors->first('dead_stock') }}</div>
@@ -80,7 +85,7 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="number" id="max" name="max" class="form-control col-md-7 col-xs-12"
-                                    value="{{ $bahan_baku->max ?? '' }}">
+                                        value="{{ $bahan_baku->max ?? '' }}">
                                 </div>
                                 @if ($errors->has('max'))
                                     <div class="error">{{ $errors->first('max') }}</div>

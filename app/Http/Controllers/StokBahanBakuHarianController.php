@@ -12,9 +12,23 @@ class StokBahanBakuHarianController extends Controller
     public function index()
     {
         $stokbahanbakuharian = StokBahanBakuHarian::all();
-        // dd($stokbahanbakuharian);
 
-        return view('stokbahanbakuharian.index', compact('stokbahanbakuharian'));
+        $bahan_baku = BahanBaku::all();
+
+        $bb = [];
+        foreach ($bahan_baku as $b) {
+            foreach ($b->stok_harian()->get() as $sh) {
+                if (isset($bb[$sh->date])) {
+                    $bb[$sh->date][$b->id] = $sh->stok;
+                } else {
+                    $bb[$sh->date] = [$b->id => $sh->stok];
+                }
+                // dd($sh);
+            }
+        }
+        // dd($bahan_baku);
+
+        return view('stokbahanbakuharian.index', compact('stokbahanbakuharian', 'bb', 'bahan_baku'));
     }
     public function create()
     {
@@ -23,6 +37,54 @@ class StokBahanBakuHarianController extends Controller
 
 
         return view('stokbahanbakuharian.create', compact('bahan_baku'));
+    }
+
+    public function store(Request $request, $date = null)
+    {
+        // dd($request);
+        $tgl_now = $date ?? date('Y-m-d');
+        $stokbahanbakuharian = StokBahanBakuHarian::where('date', '=', $tgl_now)->get();
+        if ($stokbahanbakuharian->count() == 0) {
+            foreach ($request->nilai as $i => $nil) {
+                StokBahanBakuHarian::create([
+                    'id_bahan_baku' => $i,
+                    'date' => $tgl_now,
+                    'stok' => $nil
+                ]);
+            }
+        } else {
+            foreach ($stokbahanbakuharian as $sbb) {
+                $sbb->stok = $request->nilai[$sbb->bahan_baku->id];
+                $sbb->save();
+            }
+        }
+
+        return redirect()->route('stokbahanbakuharian');
+    }
+
+    public function edit($date)
+    {
+
+        $bahan_baku = BahanBaku::all();
+        $tgl_now = $date;
+        $stokbahanbakuharian = StokBahanBakuHarian::where('date', '=', $tgl_now)->get();
+        $stok = [];
+        foreach ($stokbahanbakuharian as $bb) {
+            $stok[$bb->bahan_baku->id] = $bb->stok;
+        }
+
+        // dd($stok);
+
+        return view('stokbahanbakuharian.create', compact('bahan_baku','stok'));
+    }
+
+    public function delete($date){
+        $tgl_now = $date;
+        $stokbahanbakuharian = StokBahanBakuHarian::where('date', '=', $tgl_now)->get();
+        foreach ($stokbahanbakuharian as $bb) {
+            $bb->delete();
+        }
+        return redirect()->route('stokbahanbakuharian');
     }
     // public function store(Request $request)
     // {

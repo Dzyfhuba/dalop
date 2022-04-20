@@ -18,5 +18,9 @@ class BahanBaku extends Model
 
     // Iki kebalikane, sing gaole diisi form.
     protected $guarded = ['id'];
+
+    function stok_harian(){
+        return $this->hasMany(StokBahanBakuHarian::class,'id_bahan_baku','id');
+    }
  
 }
