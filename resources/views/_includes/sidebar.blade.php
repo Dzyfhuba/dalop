@@ -1,5 +1,5 @@
 <div class="left_col scroll-view">
-    <div class="navbar nav_title " style="border: 0; background-color:white">
+    <div class="navbar nav_title " style="border: 0; background-color:rgb(240, 236, 236)">
       <a href="index.html" class="site_title"> 
         <img src="{{ asset('template/images/a.png') }}" width="auto" height="40" alt="..." class="img-circle ">
         
@@ -37,24 +37,35 @@
           </li>
           <li><a href="{{ route('pabrik') }}"><i class="fa fa-edit"></i> Data Pabrik</a>
           </li>
-          <li><a href="{{ route('produk') }}"><i class="fa fa-laptop"></i> Data Produk</a>
+          <li><a href="{{ route('bahan_baku') }}"><i class="fa fa-edit"></i> Data Bahan Baku</a>
+          </li>
+          {{-- <li><a href="{{ route('stokbahanbakuharian') }}"><i class="fa fa-laptop"></i> Stok Bahan Baku Harian</a> --}}
+          {{-- </li> --}}
+          <li><a href="{{ route('produk') }}"><i class="fa fa-edit"></i> Data Produk</a>
           </li>
           <li><a href="{{ route('produkvarian') }}"><i class="fa fa-laptop"></i> Produk Varian</a>
           </li>
+
+          <ul class="nav side-menu"> 
+          <li><a><i class="fa fa-laptop"></i> Data Harian <span class="fa fa-chevron-down"></span></a>
+                     <ul class="nav child_menu">
           <li><a href="{{ route('dataprodukharian') }}"><i class="fa fa-laptop"></i> Data Produk Harian</a>
           </li>
-          <ul class="nav side-menu">
-           <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+          <li><a href="{{ route('stokbahanbakuharian') }}"><i class="fa fa-laptop"></i> Stok Bahan Baku Harian</a>
+          </li>
+        </ul>
+
+          
+          <ul class="nav side-menu"> </ul>  
+          <li><a><i class="fa fa-bar-chart-o "></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
           <li><a href="{{ route('rekapdataproduk') }}"><i class="fa fa-laptop"></i> Rekap Data Produk</a>
           </li>
           <li><a href="{{ route('rekapdataprodukvarian') }}"><i class="fa fa-laptop"></i> Rekap Data Produk Varian</a>
           </li>
          
-          
-          
-          
-        </ul>
+           
+        
       </div>
       
 

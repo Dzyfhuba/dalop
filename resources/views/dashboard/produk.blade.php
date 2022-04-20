@@ -170,12 +170,6 @@
 
         </div>
 
-
-
-
-
-
-
     </div>
 @endsection
 

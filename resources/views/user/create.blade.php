@@ -56,7 +56,7 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div id="jenis Kelamin" class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-default {{ isset($user->jeniskelamin)?($user->jeniskelamin == 'Laki - laki'?'active':''):'' }}" data-toggle-class="btn-primary"
+                                    <label class="btn btn-default {{ isset($user->jeniskelamin)?($user->jeniskelamin == 'Laki - laki'?'active':''):'' }}" data-toggle-class="btn-primary"
                                             data-toggle-passive-class="btn-default">
                                             <input type="radio" name="jenis_kelamin" value="Laki - laki" required  {{ isset($user->jeniskelamin)?($user->jeniskelamin == 'Laki - laki'?'checked':''):'' }}> &nbsp;
                                             Laki - laki

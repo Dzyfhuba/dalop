@@ -27,14 +27,29 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function () {
 
-
-    Route::get('/logout',function(){
+    Route::group(['prefix' => 'bahanbaku'], function () {
+        Route::get('/', [App\Http\Controllers\BahanBakuController::class, 'index'])->name('bahan_baku');
+        Route::get('/create', [App\http\Controllers\BahanBakuController::class, 'create'])->name('bahan_baku.create');
+        Route::post('/create', [App\Http\Controllers\BahanBakuController::class, 'store'])->name('bahan_baku.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\BahanBakuController::class, 'edit'])->name('bahan_baku.edit');
+        Route::post('/edit/{id}', [App\Http\Controllers\BahanBakuController::class, 'update'])->name('bahan_baku.edit');
+        Route::get('/delete/{id}', [App\Http\Controllers\BahanBakuController::class, 'delete'])->name('bahan_baku.delete');
+    });
+    Route::group(['prefix' => 'stokbahanbakuharians'], function () {
+        Route::get('/', [App\Http\Controllers\StokBahanBakuHarianController::class, 'index'])->name('stokbahanbakuharian');
+        Route::get('/create', [App\Http\Controllers\StokBahanBakuHarianController::class, 'create'])->name('stokbahanbakuharian.create');
+        Route::post('/create', [App\Http\Controllers\StokBahanBakuHarianController::class, 'store'])->name('stokbahanbakuharian.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'edit'])->name('stokbahanbakuharian.edit');
+        Route::post('/edit/{id}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'update'])->name('stokbahanbakuharian.edit');
+        Route::get('/delete/{id}', [App\Http\Controllers\StokBahanBakuHarianController::class, 'delete'])->name('stokbahanbakuharian.delete');
+    });
+    Route::get('/logout', function () {
         auth()->logout();
         return redirect()->route('home');
     });
 
-    Route::group(['prefix'=>'dashboard'],function(){
-        Route::get('/produk',[DashboardController::class,'produk'])->name('dashboard.produk');
+    Route::group(['prefix' => 'dashboard'], function () {
+        Route::get('/produk', [DashboardController::class, 'produk'])->name('dashboard.produk');
     });
 
     Route::group(['prefix' => 'users'], function () {
