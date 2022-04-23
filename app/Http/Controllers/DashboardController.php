@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BahanBaku;
 use App\Models\DataProdukHarian;
 use App\Models\Produk;
 use App\Models\ProdukVarian;
+use App\Models\StokBahanBakuHarian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -124,6 +126,21 @@ class DashboardController extends Controller
     }
     public function bahanbaku(Request $request)
     {
-        return view('dashboard.bahanbaku');
+
+        $bahan_baku = BahanBaku::all();
+
+        $tahun = $request->tahun??date("Y")-1;
+        $id_bahan_baku = $request->bahan_baku??$bahan_baku[0]->id;
+
+        $stok = StokBahanBakuHarian::where('id_bahan_baku','=',$id_bahan_baku)->whereYear('date','=',$tahun)->groupBy('date')->get();
+        $data = ['date'=>[],'stok'=>[]];
+        foreach($stok as $stk){
+            $data['date'][] = $stk->date;
+            $data['stok'][] = $stk->stok;
+        }
+        
+        // dd($data);
+
+        return view('dashboard.bahanbaku',compact('data','bahan_baku'));
     }
 }

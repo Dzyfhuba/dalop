@@ -16,6 +16,15 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        <div>
+                            <form action="">
+
+                                <input type="date" name="first_date" value="{{request()->first_date ?? $first_date}}">
+                                <input type="date" name="end_date" value="{{request()->end_date ?? $end_date}}">
+                                <button type="submit">Cari</button>
+                            </form>
+                        </div>
+
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -41,8 +50,8 @@
                                                     class="glyphicon glyphicon-edit"></span></a>
 
                                             <a type="button" class="btn btn-danger btn-xs"
-                                                href={{ route('stokbahanbakuharian.delete', ['date' => $i]) }}>Delete <span
-                                                    class="glyphicon glyphicon-trash"></span></a>
+                                                href={{ route('stokbahanbakuharian.delete', ['date' => $i]) }}>Delete
+                                                <span class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                     </tr>
                                 @endforeach

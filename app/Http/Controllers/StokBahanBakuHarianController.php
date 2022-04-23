@@ -9,15 +9,27 @@ use Illuminate\Http\Request;
 class StokBahanBakuHarianController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        $stokbahanbakuharian = StokBahanBakuHarian::all();
+        if ($request->first_date) {
+            $first_date = $request->first_date;
+        } else {
+            $first_date = StokBahanBakuHarian::orderBy('date', 'ASC')->limit(1)->first()->date;
+        }
+        if ($request->end_date) {
+            $end_date = $request->end_date;
+        } else {
+            $end_date = StokBahanBakuHarian::orderBy('date', 'DESC')->limit(1)->first()->date;
+        }
+
+
+        // $stokbahanbakuharian = StokBahanBakuHarian::whereBetween('date', [$first_date, $end_date])->get();
 
         $bahan_baku = BahanBaku::all();
 
         $bb = [];
         foreach ($bahan_baku as $b) {
-            foreach ($b->stok_harian()->get() as $sh) {
+            foreach ($b->stok_harian()->whereBetween('date', [$first_date, $end_date])->get() as $sh) {
                 if (isset($bb[$sh->date])) {
                     $bb[$sh->date][$b->id] = $sh->stok;
                 } else {
@@ -28,7 +40,7 @@ class StokBahanBakuHarianController extends Controller
         }
         // dd($bahan_baku);
 
-        return view('stokbahanbakuharian.index', compact('stokbahanbakuharian', 'bb', 'bahan_baku'));
+        return view('stokbahanbakuharian.index', compact( 'bb', 'bahan_baku','first_date','end_date'));
     }
     public function create()
     {
