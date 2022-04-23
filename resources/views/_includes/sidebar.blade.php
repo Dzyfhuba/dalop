@@ -29,7 +29,7 @@
         <ul class="nav side-menu">
           <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="/home">Dashboard</a></li>
+              <li><a href="{{route('dashboard.bahanbaku')}}">Dashboard Bahan Baku</a></li>
               <li><a href="{{route('dashboard.produk')}}">Dashboard Produk</a></li>
             </ul>
           </li>

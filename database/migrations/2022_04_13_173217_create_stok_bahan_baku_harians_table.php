@@ -21,6 +21,7 @@ return new class extends Migration
             ->on('bahan_bakus')->onDelete('cascade');
             $table->date('date');
             $table->double('stok');
+            $table->enum('tipe',['prediksi','realisasi']);
             $table->timestamps();
         });
     }

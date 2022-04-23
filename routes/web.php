@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'dashboard'], function () {
         Route::get('/produk', [DashboardController::class, 'produk'])->name('dashboard.produk');
+        Route::get('/bahanbaku', [DashboardController::class, 'bahanbaku'])->name('dashboard.bahanbaku');
     });
 
     Route::group(['prefix' => 'users'], function () {
