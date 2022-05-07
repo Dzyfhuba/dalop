@@ -63,7 +63,7 @@
 @section('script')
     <script>
         var date_data = @json($data['date']);
-        var year_data = {{request()->get('tahun')}};
+        var year_data = {{request()->get('tahun')||date('Y')-1}};
 
         var safety_stock = Array(date_data.length).fill({{$s_bahan_baku->safety_stock}});
         var max_stock = Array(date_data.length).fill({{$s_bahan_baku->max}});

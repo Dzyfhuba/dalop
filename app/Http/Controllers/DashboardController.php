@@ -132,7 +132,7 @@ class DashboardController extends Controller
         $tahun = $request->tahun??date("Y")-1;
         $id_bahan_baku = $request->bahan_baku??$bahan_baku[0]->id;
         $s_bahan_baku = BahanBaku::find($id_bahan_baku);
-
+        // dd($s_bahan_baku);
         $stok = StokBahanBakuHarian::where('id_bahan_baku','=',$id_bahan_baku)->whereYear('date','=',$tahun)->groupBy('date')->get();
         $data = ['date'=>[],'stok'=>[]];
         foreach($stok as $stk){
