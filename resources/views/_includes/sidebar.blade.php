@@ -63,6 +63,8 @@
           </li>
           <li><a href="{{ route('rekapdataprodukvarian') }}"><i class="fa fa-laptop"></i> Rekap Data Produk Varian</a>
           </li>
+          <li><a href="{{ route('rekapdatabahanbaku') }}"><i class="fa fa-laptop"></i> Rekap Data Bahan Baku</a>
+          </li>
          
            
         

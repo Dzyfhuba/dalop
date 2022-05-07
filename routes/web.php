@@ -101,4 +101,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/rekapdataproduk', [App\Http\Controllers\RekapDataProdukController::class, 'index'])->name('rekapdataproduk');
     Route::get('/rekapdataprodukvarian', [App\Http\Controllers\RekapDataProdukVarianController::class, 'index'])->name('rekapdataprodukvarian');
+    Route::get('/rekapdatabahanbaku', [App\Http\Controllers\RekapBahanBakuController::class, 'index'])->name('rekapdatabahanbaku');
+
 });
