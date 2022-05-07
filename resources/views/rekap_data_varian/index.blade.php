@@ -92,7 +92,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
