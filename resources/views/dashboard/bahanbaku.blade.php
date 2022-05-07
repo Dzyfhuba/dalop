@@ -15,7 +15,7 @@
 
                     <div class="row x_title d-flex">
                         <div class="col-md-6">
-                            <h3>Stok harian bahan baku </h3>
+                            <h3>Stock harian bahan baku </h3>
 
                         </div>
                     </div>
@@ -33,8 +33,7 @@
                                     <option value="{{ $p->id }}"
                                         {{ $p->id == request()->get('bahan_baku') ? 'selected' : '' }}>
                                         {{ $p->nama_bahan_baku }}</option>
-                            
-                                        @endforeach
+                                @endforeach
                             </select>
                             <button type="submit">Filter</button>
                         </form>
@@ -63,9 +62,20 @@
 
 @section('script')
     <script>
+        var date_data = @json($data['date']);
+        var year_data = {{request()->get('tahun')}};
+
+        var safety_stock = Array(date_data.length).fill({{$s_bahan_baku->safety_stock}});
+        var max_stock = Array(date_data.length).fill({{$s_bahan_baku->max}});
+        var dead_stock = Array(date_data.length).fill({{$s_bahan_baku->dead_stock}});
+    
+        
+        var today = new Date();
+        var date_now = today.getFullYear()+'-'+('0'+(today.getMonth()+1)).slice(-2)+'-'+('0'+today.getDate()).slice(-2);
+        console.log(safety_stock);
         var ctx = document.getElementById("chart").getContext('2d');
         var data = {
-            labels: @json($data['date']),
+            labels: date_data,
             datasets: [{
                 label: 'Stok',
                 data: @json($data['stok']),
@@ -74,15 +84,30 @@
                 segment: {
                     borderColor: (ctx) => {
                         const xVal = ctx.p1.parsed.x;
-                        console.log(xVal);
-                        if (xVal >= 200) {
+                        // console.log(xVal);
+                        
+                        if (xVal >= date_data.indexOf(date_now) && today.getFullYear() == year_data ) {
                             return 'gray';
-
                         } else {
                             return 'blue'
                         }
                     }
                 },
+            },{
+                label:'safety stock',
+                data: safety_stock,
+                fill: false,
+                borderColor:'yellow'
+            },{
+                label:'max',
+                data: max_stock,
+                fill: false,
+                borderColor:'green'
+            },{
+                label:'dead stock',
+                data: dead_stock,
+                fill: false,
+                borderColor:'red'
             }]
         }
         var myChart = new Chart(ctx, {

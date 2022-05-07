@@ -131,6 +131,7 @@ class DashboardController extends Controller
 
         $tahun = $request->tahun??date("Y")-1;
         $id_bahan_baku = $request->bahan_baku??$bahan_baku[0]->id;
+        $s_bahan_baku = BahanBaku::find($id_bahan_baku);
 
         $stok = StokBahanBakuHarian::where('id_bahan_baku','=',$id_bahan_baku)->whereYear('date','=',$tahun)->groupBy('date')->get();
         $data = ['date'=>[],'stok'=>[]];
@@ -141,6 +142,6 @@ class DashboardController extends Controller
         
         // dd($data);
 
-        return view('dashboard.bahanbaku',compact('data','bahan_baku'));
+        return view('dashboard.bahanbaku',compact('data','bahan_baku','s_bahan_baku'));
     }
 }
