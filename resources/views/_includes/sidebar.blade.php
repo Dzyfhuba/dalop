@@ -29,11 +29,11 @@
         <ul class="nav side-menu">
           <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="{{route('dashboard.bahanbaku')}}">Dashboard Bahan Baku</a></li>
-              <li><a href="{{route('dashboard.produk')}}">Dashboard Produk</a></li>
+              <li><a href="{{route('dashboard.bahanbaku')}}"><i class='fa fa-pie-chart'></i>Dashboard Bahan Baku</a></li>
+              <li><a href="{{route('dashboard.produk')}}"><i class='fa fa-pie-chart'></i>Dashboard Produk</a></li>
             </ul>
           </li>
-          <li><a href="{{ route('user') }}"><i class='fa fa-laptop'></i></i> Data Pengguna</a>
+          <li><a href="{{ route('user') }}"><i class='fa fa-desktop'></i></i> Data Pengguna</a>
           </li>
           <li><a href="{{ route('pabrik') }}"><i class="fa fa-edit"></i> Data Pabrik</a>
           </li>
@@ -43,7 +43,7 @@
           {{-- </li> --}}
           <li><a href="{{ route('produk') }}"><i class="fa fa-edit"></i> Data Produk</a>
           </li>
-          <li><a href="{{ route('produkvarian') }}"><i class="fa fa-laptop"></i> Produk Varian</a>
+          <li><a href="{{ route('produkvarian') }}"><i class="fa fa-edit"></i> Data Produk Varian</a>
           </li>
 
           <ul class="nav side-menu"> 

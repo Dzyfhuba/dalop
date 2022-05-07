@@ -15,7 +15,7 @@
 
                     <div class="row x_title d-flex">
                         <div class="col-md-6">
-                            <h3>Stock harian bahan baku </h3>
+                            <h3>Stok harian bahan baku </h3>
 
                         </div>
                     </div>
@@ -33,7 +33,8 @@
                                     <option value="{{ $p->id }}"
                                         {{ $p->id == request()->get('bahan_baku') ? 'selected' : '' }}>
                                         {{ $p->nama_bahan_baku }}</option>
-                                @endforeach
+                            
+                                        @endforeach
                             </select>
                             <button type="submit">Filter</button>
                         </form>
