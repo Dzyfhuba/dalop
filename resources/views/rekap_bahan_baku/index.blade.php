@@ -20,10 +20,11 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>#No</th>
-                                    <th>Nama Bahan BAKU</th>
+                                    <th>#</th>
+                                    <th>Nama Bahan Baku</th>
+                                    <th>Tanggal</th>
                                     <th>Jenis</th>
-                                    <th>Stock</th>
+                                    <th>Stok</th>
                                     <th>Safety Stock</th>
                                     <th>Dead Stock</th>
                                     <th>Max</th>
@@ -34,6 +35,7 @@
                                     <tr>
                                         <td>{{ $i + 1 }}</td>
                                         <td>{{ $stk->bahan_baku->nama_bahan_baku }}</td>
+                                        <td>{{ $stk->date }}</td>
                                         <td>{{ $stk->bahan_baku->liquid }}</td>
                                         <td>
 

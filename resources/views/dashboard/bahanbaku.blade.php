@@ -15,7 +15,7 @@
 
                     <div class="row x_title d-flex">
                         <div class="col-md-6">
-                            <h3>Stock harian bahan baku </h3>
+                            <h3>Stok harian bahan baku </h3>
 
                         </div>
                     </div>
@@ -94,17 +94,17 @@
                     }
                 },
             },{
-                label:'safety stock',
+                label:'Safety stock',
                 data: safety_stock,
                 fill: false,
                 borderColor:'yellow'
             },{
-                label:'max',
+                label:'Max',
                 data: max_stock,
                 fill: false,
                 borderColor:'green'
             },{
-                label:'dead stock',
+                label:'Dead stock',
                 data: dead_stock,
                 fill: false,
                 borderColor:'red'

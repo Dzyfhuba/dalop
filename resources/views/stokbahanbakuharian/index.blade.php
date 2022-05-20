@@ -46,8 +46,8 @@
                                         @endforeach
 
                                         <td><a type="button" class="btn btn-warning btn-xs"
-                                                href={{ route('stokbahanbakuharian.edit', ['date' => $i]) }}>Edit <span
-                                                    class="glyphicon glyphicon-edit"></span></a>
+                                                href={{ route('stokbahanbakuharian.edit', ['date' => $i]) }}>Edit 
+                                                <span class="glyphicon glyphicon-edit"></span></a>
 
                                             <a type="button" class="btn btn-danger btn-xs"
                                                 href={{ route('stokbahanbakuharian.delete', ['date' => $i]) }}>Delete
@@ -72,10 +72,15 @@
                                     </tr>
                                     
                                 @endforeach --}}
-                        </table>
-                        </tbody>
+                            </tbody>
+                            </table>
+                            <div>
+                              
+                                {{-- {{ $bb->links() }} --}}
 
-
+                            </div>
+                        <div>
+                        </div>
                     </div>
                 </div>
             </div>

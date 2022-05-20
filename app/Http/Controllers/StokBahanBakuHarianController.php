@@ -11,6 +11,8 @@ class StokBahanBakuHarianController extends Controller
     //
     public function index(Request $request)
     {
+        // $sbb = new StokBahanBakuHarian;
+
         if ($request->first_date) {
             $first_date = $request->first_date;
         } else {
@@ -21,6 +23,8 @@ class StokBahanBakuHarianController extends Controller
         } else {
             $end_date = StokBahanBakuHarian::orderBy('date', 'DESC')->limit(1)->first()->date;
         }
+        
+    //    $a =  StokBahanBakuHarian::latest()->paginate(5);
 
 
         // $stokbahanbakuharian = StokBahanBakuHarian::whereBetween('date', [$first_date, $end_date])->get();
@@ -38,7 +42,12 @@ class StokBahanBakuHarianController extends Controller
                 // dd($sh);
             }
         }
+     
+    //    $a =  StokBahanBakuHarian::latest()->paginate(25);
+
+        // $sbb = $sbb->paginate(25);
         // dd($bahan_baku);
+        
 
         return view('stokbahanbakuharian.index', compact( 'bb', 'bahan_baku','first_date','end_date'));
     }

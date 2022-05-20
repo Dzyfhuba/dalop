@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Sistem Informasi Monitoring Produk PT. Petrokimia Gresik | </title>
+    <title>Sistem monitoring bahan baku dan produk PT. Petrokimia Gresik | </title>
 
     <!-- Bootstrap -->
     @include('_includes.css')

@@ -41,7 +41,7 @@ class DashboardController extends Controller
             ->get();
 
         // dd($produk_varian);
-
+        // exit();
         $month = $request->bulan ?? 1;
 
         $prog_per_tahun = ['realisasi' => 0, 'rencana' => 0];
@@ -53,6 +53,16 @@ class DashboardController extends Controller
         foreach ($produk_varian as $pv) {
             $prog_per_tahun['realisasi'] += $pv->nilai_realisasi;
             $prog_per_tahun['rencana'] += $pv->nilai_rencana;
+            
+            // echo $pv->year . "<br>";
+            // echo $pv->month . "<br>";
+            // echo $pv->nilai_realisasi . "<br>";
+            // echo $pv->nilai_rencana . "<br>";
+            // echo $pv->id_produk_varians . "<br>";
+            // echo $pv->nama_produk . "<br>";
+            // echo $pv->nama_produk_harian . "<br>";
+            // echo $pv->date . "<br>";
+            // echo "<br>";
 
             $nama_produk = $pv->nama_produk;
 
@@ -93,6 +103,7 @@ class DashboardController extends Controller
                     ];
             }
         }
+        // exit();
         // foreach()
         $datasets = [];
         foreach ($data as $dt) {

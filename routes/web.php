@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard/produk', [App\Http\Controllers\DashboardController::class, 'produk'])->name('dashboard.produk');
 // Route::get('/users/show/{id}', [App\Http\Controllers\UserController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('/logout', function () {
         auth()->logout();
-        return redirect()->route('home');
+        return redirect()->route('dashboard.produk');
     });
 
     Route::group(['prefix' => 'dashboard'], function () {
