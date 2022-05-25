@@ -2,15 +2,21 @@
 
 namespace Database\Seeders;
 
+use DatePeriod;
+use DateInterval;
 use App\Models\Pabrik;
-use App\Models\BahanBaku;
 use App\Models\Produk;
+use App\Models\BahanBaku;
+use Nette\Utils\DateTime;
+use Illuminate\Support\Str;
+
+
 use App\Models\ProdukVarian;
-
-
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\DataProdukHarian;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -171,137 +177,195 @@ class DatabaseSeeder extends Seeder
         $aif3 = Produk::create([
             "nama_produk" => 'AIF3',
         ]); 
-        ProdukVarian::create([
+        $amoniak1 = ProdukVarian::create([
             "id_produk" => $amoniak->id,
             "id_pabrik" => $p1a->id,
             "nama_produk_varian" => 'Amoniak I',
         ]);
-        ProdukVarian::create([
+        
+        $amoniak2 = ProdukVarian::create([
             "id_produk" => $amoniak->id,
             "id_pabrik" => $p1a->id,
             "nama_produk_varian" => 'Amoniak II',
         ]);
-        ProdukVarian::create([
+
+        $urea1 = ProdukVarian::create([
             "id_produk" => $urea->id,
             "id_pabrik" => $p1b->id,
             "nama_produk_varian" => 'Urea I',
         ]);
-        ProdukVarian::create([
+
+        $urea2 = ProdukVarian::create([
             "id_produk" => $urea->id,
             "id_pabrik" => $p1b->id,
             "nama_produk_varian" => 'Urea II',
         ]);
-        ProdukVarian::create([
+
+        $za1 = ProdukVarian::create([
             "id_produk" => $za->id,
             "id_pabrik" => $p1a->id,
             "nama_produk_varian" => 'ZA I',
         ]);
-        ProdukVarian::create([
+
+        $za2 = ProdukVarian::create([
             "id_produk" => $za->id,
             "id_pabrik" => $p3a->id,
             "nama_produk_varian" => 'ZA II',
         ]);
-        ProdukVarian::create([
+
+        $za3 = ProdukVarian::create([
             "id_produk" => $za->id,
             "id_pabrik" => $p1b->id,
             "nama_produk_varian" => 'ZA III',
         ]);
-        ProdukVarian::create([
+
+        $np1 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2a->id,
             "nama_produk_varian" => 'Ph 15-10-12',
         ]);
-        ProdukVarian::create([
+        
+        $np2 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2b->id,
             "nama_produk_varian" => 'NPS',
         ]);
-        ProdukVarian::create([
+
+        $np3 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2a->id,
             "nama_produk_varian" => 'Phonska Plus',
         ]);
-        ProdukVarian::create([
+
+        $np4 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2b->id,
             "nama_produk_varian" => 'DAP',
         ]);
-        ProdukVarian::create([
+
+        $np5 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2b->id,
             "nama_produk_varian" => 'NPK Kebomas',   
         ]);
-        ProdukVarian::create([
+
+        $np6 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2b->id,
             "nama_produk_varian" => 'NPK Kebomas Komersil',
         ]);
-        ProdukVarian::create([
+
+        $np7 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2b->id,
             "nama_produk_varian" => 'SP - 36',
         ]);
-        ProdukVarian::create([
+
+        $np8 = ProdukVarian::create([
             "id_produk" => $np->id,
             "id_pabrik" => $p2a->id,
             "nama_produk_varian" => 'SP - 26',
         ]);
-        ProdukVarian::create([
+
+        $zk1 = ProdukVarian::create([
             "id_produk" => $zk->id,
             "id_pabrik" => $p3a->id,
             "nama_produk_varian" => 'ZK - I',
         ]);
-        ProdukVarian::create([
+
+        $zk2 = ProdukVarian::create([
             "id_produk" => $zk->id,
             "id_pabrik" => $p3a->id,
             "nama_produk_varian" => 'ZK - II',
         ]);
-        ProdukVarian::create([
+
+        $h2so4_1 = ProdukVarian::create([
             "id_produk" => $h2so4->id,
             "id_pabrik" => $p3a->id,
             "nama_produk_varian" => 'H2SO4 - I',
         ]);
-        ProdukVarian::create([
+
+        $h2so4_2 = ProdukVarian::create([
             "id_produk" => $h2so4->id,
             "id_pabrik" => $p3b->id,
             "nama_produk_varian" => 'H2SO4 - II',
         ]);
-        ProdukVarian::create([
+
+        $h3po4_1 = ProdukVarian::create([
             "id_produk" => $h3po4->id,
             "id_pabrik" => $p3a->id,
             "nama_produk_varian" => 'H3PO4 - I',
         ]);
-        ProdukVarian::create([
+
+        $h3po4_2 = ProdukVarian::create([
             "id_produk" => $h3po4->id,
             "id_pabrik" => $p3b->id,
             "nama_produk_varian" => 'H3PO4 - II',
         ]);
-        ProdukVarian::create([
+
+        $hcl1 = ProdukVarian::create([
             "id_produk" => $hcl->id,
             "id_pabrik" => $p3a->id,
             "nama_produk_varian" => 'HCL A - I',
         ]);
-        ProdukVarian::create([
+
+        $hcl2 = ProdukVarian::create([
             "id_produk" => $hcl->id,
             "id_pabrik" => $p3a->id,
             "nama_produk_varian" => 'HCL B - I',
         ]);
-        ProdukVarian::create([
+
+        $hcl3 = ProdukVarian::create([
             "id_produk" => $hcl->id,
             "id_pabrik" => $p3b->id,
             "nama_produk_varian" => 'HCL A - II',
         ]);
-        ProdukVarian::create([
+
+        $hcl4 = ProdukVarian::create([
             "id_produk" => $hcl->id,
             "id_pabrik" => $p3b->id,
             "nama_produk_varian" => 'HCL B - II ',
         ]);
         
-        ProdukVarian::create([
+        $aif3_1 = ProdukVarian::create([
             "id_produk" => $aif3->id,
             "id_pabrik" => $p3b->id,
             "nama_produk_varian" => 'AIF - 3',
         ]);
+
+        $begin = new DateTime ('2021-01-01');
+        $end = new DateTime('2024-01-01');
+
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($begin, $interval, $end);
+
+        foreach ($period as $dt){
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+
+            DataProdukHarian::create([
+                "id_produk_varian" => $amoniak1 ->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+
+            DataProdukHarian::create([
+                "id_produk_varian" => $amoniak2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+
+            ]);
+
+        }
         
         
     }
