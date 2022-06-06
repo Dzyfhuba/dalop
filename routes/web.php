@@ -18,8 +18,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/dashboard', function () {
+    return view('dashboard/produk');
 });
 Auth::routes();
 Route::get('/dashboard/produk', [App\Http\Controllers\DashboardController::class, 'produk'])->name('dashboard.produk');

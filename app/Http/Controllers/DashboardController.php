@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BahanBaku;
-use App\Models\DataProdukHarian;
+use DateTime;
 use App\Models\Produk;
+use App\Models\BahanBaku;
 use App\Models\ProdukVarian;
-use App\Models\StokBahanBakuHarian;
 use Illuminate\Http\Request;
+use App\Models\DataProdukHarian;
 use Illuminate\Support\Facades\DB;
+use App\Models\StokBahanBakuHarian;
 
 class DashboardController extends Controller
 {
@@ -16,6 +17,7 @@ class DashboardController extends Controller
     public function produk(Request $request)
     {
         $produk = Produk::all();
+
 
         // $month = 1;
         $tahun_awal = explode("-", DataProdukHarian::orderBy('date', 'ASC')->limit(1)->first()->date)[0];
@@ -32,28 +34,37 @@ class DashboardController extends Controller
 
         $data = [];
 
-        $produk_varian = DataProdukHarian::whereYear('date', '=', $year)
-            ->where('id_produk', '=', $produk_id)
-            ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
-            ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
-            ->select(DB::raw('YEAR(date) year, MONTH(date) month'), DB::raw('SUM(nilai_realisasi) as nilai_realisasi'), DB::raw('SUM(nilai_rencana) as nilai_rencana'), 'produk_varians.id as id_produk_varians', 'produks.nama_produk as nama_produk', 'produk_varians.nama_produk_varian as nama_produk_varian', 'date',)
-            ->groupby('month')->groupBy('nama_produk_varian')
-            ->get();
+        $produk_varian = DB::select("
+        SELECT 	pr.nama_produk,
+        dph.id_produk_varian, 
+        pv.nama_produk_varian as nama_produk_varian,
+        date_trunc('month', dph.date) as month, 
+        SUM(dph.nilai_realisasi) as nilai_realisasi,
+        SUM(dph.nilai_rencana) as nilai_rencana,
+        AVG(dph.persentase) as avg_presentase
+        FROM data_produk_harians dph, produk_varians pv, produks pr
+        WHERE dph.id_produk_varian = pv.id 
+        AND pv.id_produk = pr.id
+        AND pr.id = '$produk_id'
+        AND date_part('year', dph.date) = '$year'
+            GROUP BY dph.id_produk_varian, pv.nama_produk_varian, pr.nama_produk, month   
+        ");
 
         // dd($produk_varian);
         // exit();
+
+        // $month
         $month = $request->bulan ?? 1;
 
         $prog_per_tahun = ['realisasi' => 0, 'rencana' => 0];
         $prog_per_bulan = ['realisasi' => 0, 'rencana' => 0];
         $prog_per_bulan_sd = ['realisasi' => 0, 'rencana' => 0];
-
         $nama_produk = '';
 
         foreach ($produk_varian as $pv) {
             $prog_per_tahun['realisasi'] += $pv->nilai_realisasi;
             $prog_per_tahun['rencana'] += $pv->nilai_rencana;
-            
+
             // echo $pv->year . "<br>";
             // echo $pv->month . "<br>";
             // echo $pv->nilai_realisasi . "<br>";
@@ -66,12 +77,15 @@ class DashboardController extends Controller
 
             $nama_produk = $pv->nama_produk;
 
-            if ((int)$pv->month <= $month) {
+            // var_dump($pv->month);
+            $date = new DateTime($pv->month);
+
+            if ((int)$date->format('m') <= $month) {
                 // dd('aa');
                 $prog_per_bulan_sd['realisasi'] += $pv->nilai_realisasi;
                 $prog_per_bulan_sd['rencana'] += $pv->nilai_rencana;
             }
-            if ((int)$pv->month == $month) {
+            if ((int)$date->format('m') == $month) {
                 // dd('aa');
                 $prog_per_bulan['realisasi'] += $pv->nilai_realisasi;
                 $prog_per_bulan['rencana'] += $pv->nilai_rencana;
@@ -140,19 +154,25 @@ class DashboardController extends Controller
 
         $bahan_baku = BahanBaku::all();
 
-        $tahun = $request->tahun??date("Y")-1;
-        $id_bahan_baku = $request->bahan_baku??$bahan_baku[0]->id;
+        $tahun = $request->tahun ?? date("Y") - 1;
+        $id_bahan_baku = $request->bahan_baku ?? $bahan_baku[0]->id;
         $s_bahan_baku = BahanBaku::find($id_bahan_baku);
         // dd($s_bahan_baku);
-        $stok = StokBahanBakuHarian::where('id_bahan_baku','=',$id_bahan_baku)->whereYear('date','=',$tahun)->groupBy('date')->get();
-        $data = ['date'=>[],'stok'=>[]];
-        foreach($stok as $stk){
+        $stok = DB::select("SELECT * FROM stok_bahan_baku_harians 
+        WHERE id_bahan_baku = '1' 
+            AND date_part('year', date) = '2021' 
+        GROUP BY date, id
+        ORDER BY date ASC");
+        // $stok = StokBahanBakuHarian::where('id_bahan_baku','=',$id_bahan_baku)->whereYear('date','=',$tahun)->groupBy('date')->get();
+
+        $data = ['date' => [], 'stok' => []];
+        foreach ($stok as $stk) {
             $data['date'][] = $stk->date;
             $data['stok'][] = $stk->stok;
         }
-        
+
         // dd($data);
 
-        return view('dashboard.bahanbaku',compact('data','bahan_baku','s_bahan_baku'));
+        return view('dashboard.bahanbaku', compact('data', 'bahan_baku', 's_bahan_baku'));
     }
 }

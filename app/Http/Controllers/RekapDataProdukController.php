@@ -59,8 +59,7 @@ class RekapDataProdukController extends Controller
                 DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
                 DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
             )
-            ->groupBy('produk')
-            ->get();
+            ->groupBy('produk', 'data_produk_harians.id')->get();
 
 
         $data_produk_bulanan = DataProdukHarian::whereBetween('date', [$first_date, $end_date])
@@ -73,11 +72,12 @@ class RekapDataProdukController extends Controller
                 DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
                 DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
             )
-            ->groupBy('produk')
+            ->groupBy('produk', 'data_produk_harians.id')
             ->get();
 
         // dd($data_produk_bulanan);
 
         return view('rekap_data.index', compact('data_produk_harian', 'date','data_produk_bulanan','first_date','end_date'));
+        
     }
 }

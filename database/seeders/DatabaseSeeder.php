@@ -7,6 +7,8 @@ use DateInterval;
 use App\Models\Pabrik;
 use App\Models\Produk;
 use App\Models\BahanBaku;
+use App\Models\User;
+use App\Models\StokBahanBakuHarian;
 use Nette\Utils\DateTime;
 use Illuminate\Support\Str;
 
@@ -28,6 +30,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(3)->create();
+        User::create([
+            'name' => "admin",
+            'email' => "admin@gmail.com",
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10)
+        ]);
         $p1a = Pabrik::create([
             "nama_pabrik" => 'Pabrik IA',
 
@@ -52,93 +61,93 @@ class DatabaseSeeder extends Seeder
             "nama_pabrik" => 'Pabrik IIIB',
 
         ]);
-        BahanBaku::create([
+        $nh3 = BahanBaku::create([
             "nama_bahan_baku" => 'NH3',
             "liquid" => 'liquid',
             "safety_stock" => 10000,
             "dead_stock" => 6000,
             "max" => 36500,
         ]);
-        BahanBaku::create([
+        $sa = BahanBaku::create([
             "nama_bahan_baku" => 'SA',
             "liquid" => 'Liquid',
             "safety_stock" => 20000,
             "dead_stock" => 5000,
             "max" => 62000,
         ]);
-        BahanBaku::create([
+        $pal = BahanBaku::create([
             "nama_bahan_baku" => 'PA(Liquid + Sludge Actual)',
             "liquid" => 'Liquid',
             "safety_stock" => 22000,
             "dead_stock" => 6000,
             "max" => 58500,
         ]);
-        BahanBaku::create([
+        $paa = BahanBaku::create([
             "nama_bahan_baku" => 'PA(Liqud Actual)',
             "liquid" => 'Liquid',
         ]);
 
-        BahanBaku::create([
+        $pr2 = BahanBaku::create([
             "nama_bahan_baku" => 'PR II',
             "liquid" => 'Non Liquid',
             "safety_stock" => 20000,
             "dead_stock" => 10000,
             "max" => 50000,
         ]);
-        BahanBaku::create([
+        $pr3a = BahanBaku::create([
             "nama_bahan_baku" => 'PR IIIA',
             "liquid" => 'Non Liquid',
             "safety_stock" => 35000,
             "dead_stock" => 10000,
             "max" => 80000,
         ]);
-        BahanBaku::create([
+        $pr3b = BahanBaku::create([
             "nama_bahan_baku" => 'PR IIIB',
             "liquid" => 'Non Liquid',
             "safety_stock" => 35000,
             "dead_stock" => 10000,
             "max" => 45000,
         ]);
-        BahanBaku::create([
+        $kclm = BahanBaku::create([
             "nama_bahan_baku" => 'KCL Merah',
             "liquid" => 'Non Liquid',
             "safety_stock" => 27000,
             "dead_stock" => 1000,
             "max" => 54000,
         ]);
-        BahanBaku::create([
+        $kclp = BahanBaku::create([
             "nama_bahan_baku" => 'KCL Putih',
             "liquid" => 'Non liquid',
             "safety_stock" => 6000,
             "dead_stock" => 1000,
             "max" => 27000,
         ]);
-        BahanBaku::create([
+        $slf = BahanBaku::create([
             "nama_bahan_baku" => 'Sulfur',
             "liquid" => 'Non Liquid',
             "safety_stock" => 18000,
             "dead_stock" => 5000,
             "max" => 75000,
         ]);
-        BahanBaku::create([
+        $alo = BahanBaku::create([
             "nama_bahan_baku" => 'AL(OH)3',
             "liquid" => 'Non Liquid',
             "safety_stock" => 2000,
             "dead_stock" => 500,
             "max" => 4000,
         ]);
-        BahanBaku::create([
+        $dap = BahanBaku::create([
             "nama_bahan_baku" => 'DAP',
             "liquid" => 'Non Liquid',
             "safety_stock" => 13000,
             "dead_stock" => 1000,
             "max" => 29750,
         ]);
-        BahanBaku::create([
+        $ur = BahanBaku::create([
             "nama_bahan_baku" => 'Urea',
             "liquid" => 'Non Liquid',
         ]);
-        BahanBaku::create([
+        $zao = BahanBaku::create([
             "nama_bahan_baku" => 'ZA',
             "liquid" => 'liquid',
             "safety_stock" => 21000,
@@ -245,24 +254,24 @@ class DatabaseSeeder extends Seeder
 
         $np5 = ProdukVarian::create([
             "id_produk" => $np->id,
-            "id_pabrik" => $p2b->id,
-            "nama_produk_varian" => 'NPK Kebomas',   
+            "id_pabrik" => $p2a->id,
+            "nama_produk_varian" => 'NPK Kebomas',
         ]);
 
         $np6 = ProdukVarian::create([
             "id_produk" => $np->id,
-            "id_pabrik" => $p2b->id,
+            "id_pabrik" => $p2a->id,
             "nama_produk_varian" => 'NPK Kebomas Komersil',
         ]);
 
-        $np7 = ProdukVarian::create([
-            "id_produk" => $np->id,
+        $sp36a = ProdukVarian::create([
+            "id_produk" => $sp36->id,
             "id_pabrik" => $p2b->id,
             "nama_produk_varian" => 'SP - 36',
         ]);
 
-        $np8 = ProdukVarian::create([
-            "id_produk" => $np->id,
+        $sp26a = ProdukVarian::create([
+            "id_produk" => $sp26->id,
             "id_pabrik" => $p2a->id,
             "nama_produk_varian" => 'SP - 26',
         ]);
@@ -362,9 +371,530 @@ class DatabaseSeeder extends Seeder
                 "nilai_realisasi" => $nilai_realisasi,
                 "nilai_rencana" => $nilai_rencana,
                 "persentase" => $persentase,
-
+            ]);
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $urea1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
             ]);
 
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $urea2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $za1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $za2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $za3->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1000*100) /100;
+            $nilai_rencana = mt_rand (700, 900);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1000*100) /100;
+            $nilai_rencana = mt_rand (700, 900);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np3->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np4->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1000, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np5->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            
+            $nilai_realisasi = mt_rand (1000*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np6->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $sp36a->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $sp26a->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1000, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1000, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np3->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $np4->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $zk1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $zk2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $h2so4_1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (700, 1200);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $h2so4_2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $h3po4_1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1700);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $h3po4_2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            
+
+            
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (900, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $hcl1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $hcl2->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $hcl3->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $hcl4->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+            $nilai_realisasi = mt_rand (800*100, 1500*100) /100;
+            $nilai_rencana = mt_rand (1100, 1500);
+            $persentase = round($nilai_realisasi/$nilai_rencana * 100);
+            DataProdukHarian::create([
+                "id_produk_varian" => $aif3_1->id,
+                "date" => $dt->format("d-m-y"),
+                "nilai_realisasi" => $nilai_realisasi,
+                "nilai_rencana" => $nilai_rencana,
+                "persentase" => $persentase,
+            ]);
+
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $nh3->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 50000),
+                "tipe" => $tipe
+            ]);
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $sa->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 40000),
+                "tipe" => $tipe
+            ]);
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $pal->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 50000),
+                "tipe" => $tipe
+            ]);
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $paa->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 50000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $pr2->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(7000, 50000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $pr3a->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(8000, 40000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $pr3b->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 50000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $kclm->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(1000, 30000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $kclp->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(3000, 20000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $slf->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(3000, 35000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $dap->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 50000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $alo->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(1000, 10000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $paa->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 50000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $ur->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 50000),
+                "tipe" => $tipe
+            ]);
+
+            $rand = mt_rand(0,1);
+            if($rand == 1){
+                $tipe = 'realisasi';
+            } else {
+                $tipe = 'prediksi';
+            }
+
+            StokBahanBakuHarian::create([
+                "id_bahan_baku" => $zao->id,
+                "date" => $dt->format("d-m-Y"),
+                "stok" => mt_rand(5000, 30000),
+                "tipe" => $tipe
+            ]);
         }
         
         

@@ -279,12 +279,12 @@
         // console.log(dtset);
 
         labels.forEach((l, idx) => {
-            let nil = 0;
-            if (tt['nilai_realisasi'][idx] != 0 && tt['nilai_rencana'][idx] != 0) {
-                nil = (tt['nilai_realisasi'][idx] * 100) / tt['nilai_rencana'][idx]
-            }
-            lb.push(l + " \n " + parseFloat(nil).toFixed(2) + "%")
-        });
+         let nil = 0;
+         if (tt['nilai_realisasi'][idx] != 0 && tt['nilai_rencana'][idx] != 0) {
+            nil = parseFloat(tt['nilai_realisasi'][idx]) / parseFloat(tt['nilai_rencana'][idx]) * 10000000
+         }
+         lb.push(l + " \n " + parseFloat(nil).toFixed(2) + "%")
+      });
 
         console.log(lb);
 
