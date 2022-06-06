@@ -32,14 +32,36 @@ class DashboardController extends Controller
 
         $data = [];
 
-        $produk_varian = DataProdukHarian::whereYear('date', '=', $year)
-            ->where('id_produk', '=', $produk_id)
-            ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
-            ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
-            ->select(DB::raw('YEAR(date) year, MONTH(date) month'), DB::raw('SUM(nilai_realisasi) as nilai_realisasi'), DB::raw('SUM(nilai_rencana) as nilai_rencana'), 'produk_varians.id as id_produk_varians', 'produks.nama_produk as nama_produk', 'produk_varians.nama_produk_varian as nama_produk_varian', 'date',)
-            ->groupby('month')->groupBy('nama_produk_varian')
-            ->get();
+        $produk_varian2 = DataProdukHarian::whereYear('date', '=', $year)->join('produk_varians',function($join){
+            $join->on('data_produk_harians.id_produk_varian' ,'=', 'produk_varians.id');
+        })->where('produk_varians.id_produk', '=', $produk_id)
+        ->get();
 
+        // $produk_varian = DataProdukHarian::whereYear('date', '=', $year)
+        //     ->where('id_produk', '=', $produk_id)
+        //     ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
+        //     ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
+
+        //     ->select(DB::raw('EXTRACT(YEAR FROM data_produk_harians.date) , EXTRACT(MONTH FROM data_produk_harians.date) as month'), DB::raw('SUM(nilai_realisasi) as nilai_realisasi'), DB::raw('SUM(nilai_rencana) as nilai_rencana'), 'produk_varians.id as id_produk_varians', 'produks.nama_produk as nama_produk', 'produk_varians.nama_produk_varian as nama_produk_varian', 'data_produk_harians.date as date')
+            
+        //     ->groupBy('month')->groupBy('nama_produk_varian')
+        //     ->get();
+
+        $_tdt = [];
+        foreach($produk_varian2 as $pv){
+            $month = explode('-',$pv->date)[1];
+            $nm = $pv->produk_varian->nama_produk_varian;
+            if(isset($_tdt[$month.'-'.$nm])){
+                $_tdt[$month.'-'.$nm]->nilai_realisasi += $pv->nilai_realisasi;
+                $_tdt[$month.'-'.$nm]->nilai_rencana += $pv->nilai_rencana;
+            }else{
+                $_tdt[$month.'-'.$nm] = (object)['nilai_realisasi'=>$pv->nilai_realisasi,'nilai_rencana'=>$pv->nilai_rencana,'month'=>$month,'id_produk_varian'=>$pv->id_produk_varians,'date'=>$pv->date,'nama_produk'=>$pv->produk_varian->produk->nama_produk,'nama_produk_varian'=>$pv->produk_varian->nama_produk_varian];
+            }
+            // $tdt[]
+            #echo "<br>";
+        }
+
+        // dd($_tdt);
         // dd($produk_varian);
         // exit();
         $month = $request->bulan ?? 1;
@@ -50,7 +72,7 @@ class DashboardController extends Controller
 
         $nama_produk = '';
 
-        foreach ($produk_varian as $pv) {
+        foreach ($_tdt as $pv) {
             $prog_per_tahun['realisasi'] += $pv->nilai_realisasi;
             $prog_per_tahun['rencana'] += $pv->nilai_rencana;
             
@@ -144,7 +166,19 @@ class DashboardController extends Controller
         $id_bahan_baku = $request->bahan_baku??$bahan_baku[0]->id;
         $s_bahan_baku = BahanBaku::find($id_bahan_baku);
         // dd($s_bahan_baku);
-        $stok = StokBahanBakuHarian::where('id_bahan_baku','=',$id_bahan_baku)->whereYear('date','=',$tahun)->groupBy('date')->get();
+        $_stok = StokBahanBakuHarian::where('id_bahan_baku','=',$id_bahan_baku)->get();
+
+        $stok = [];
+        foreach($_stok as $st){
+            $dt_e = explode('-',$st->date);
+            $dt_year = $dt_e[0];
+            // dd($dt_year);
+            $dt_month = $dt_e[1];
+            if($dt_year == $tahun){
+                $stok[$st->date] = (object)['date'=>$st->date,'stok'=>$st->stok];
+            }
+        }
+        dd($stok);
         $data = ['date'=>[],'stok'=>[]];
         foreach($stok as $stk){
             $data['date'][] = $stk->date;
