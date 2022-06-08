@@ -34,7 +34,7 @@
                             </form>
                         </div>
 
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="projectsTable">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -77,4 +77,63 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>$('#projectsTable').DataTable({
+    // "columnDefs": [{
+    //    "targets": [6],
+    //    "visible": false,
+    //    "searchable": true
+    // }],
+    dom: 'Bfrtip',
+    buttons: [{
+          extend: 'copy',
+          footer: false,
+          exportOptions: {
+             columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+          }
+       },
+       {
+          extend: 'csv',
+          footer: false,
+          filename: function() {
+             var time = new Date().getTime();
+             var date = new Date(time);
+             return 'Daftar Proyek Export ' + date.toString();
+          },
+          exportOptions: {
+             columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+          }
+       },
+       {
+          extend: 'excel',
+          footer: false,
+          autoFilter: true,
+          filename: function() {
+             var time = new Date().getTime();
+             var date = new Date(time);
+             return 'Daftar Proyek Export ' + date.toString();
+          },
+          sheetName: 'Daftar Proyek',
+          exportOptions: {
+             columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+          }
+       },
+       {
+          extend: 'pdf',
+          footer: false,
+          orientation: 'landscape',
+          pageSize: 'A2',
+          filename: function() {
+             var time = new Date().getTime();
+             var date = new Date(time);
+             return 'Daftar Proyek Export ' + date.toString();
+          },
+          exportOptions: {
+             columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+          }
+       }
+    ]
+ });</script>
 @endsection

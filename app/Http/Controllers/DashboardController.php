@@ -108,8 +108,9 @@ class DashboardController extends Controller
             $nama_produk = $pv->nama_produk;
 
             // var_dump($pv->month);
-            $date = new DateTime($pv->month);
-
+            
+            $date = new DateTime();
+            // var_dump($data);
             if ((int)$date->format('m') <= $month) {
                 // dd('aa');
                 $prog_per_bulan_sd['realisasi'] += $pv->nilai_realisasi;
@@ -120,7 +121,6 @@ class DashboardController extends Controller
                 $prog_per_bulan['realisasi'] += $pv->nilai_realisasi;
                 $prog_per_bulan['rencana'] += $pv->nilai_rencana;
             }
-
 
             if (isset($data[$pv->nama_produk_varian . "-nilai_rencana"])) {
                 $data[$pv->nama_produk_varian . "-nilai_rencana"]['data'][$pv->month] = $pv->nilai_rencana;
@@ -157,20 +157,25 @@ class DashboardController extends Controller
         }
 
         $produk_varian_pertahun = $datasets;
-
+        // dd($prog_per_tahun);
         $ppb = 0;
         if ($prog_per_bulan['realisasi'] != 0 && $prog_per_bulan['rencana'] != 0) {
-            $ppb = $prog_per_bulan['realisasi'] / $prog_per_bulan['rencana'] * 100;
+            $ppb = $prog_per_bulan['realisasi'] / $prog_per_bulan['rencana'] * 100/1;
+            // dd($ppb);
         }
 
         $ppbs = 0;
+        // dd($ppbs);
         if ($prog_per_bulan['realisasi'] != 0 && $prog_per_bulan['rencana'] != 0) {
-            $ppbs = $prog_per_bulan_sd['realisasi'] / $prog_per_bulan_sd['rencana'] * 100;
+            $ppbs = $prog_per_bulan_sd['realisasi'] / $prog_per_bulan_sd['rencana'] * 100/1;
+            echo 'ppbs'.$ppbs;
         }
+        
         $ppt = 0;
         if ($prog_per_tahun['realisasi'] != 0 && $prog_per_tahun['rencana'] != 0) {
-            $ppt = $prog_per_tahun['realisasi'] / $prog_per_tahun['rencana'] * 100;
+            $ppt = $prog_per_tahun['realisasi'] / $prog_per_tahun['rencana'] * 100/1;
         }
+        
 
 
 
@@ -203,7 +208,7 @@ class DashboardController extends Controller
                 $stok[$st->date] = (object)['date'=>$st->date,'stok'=>$st->stok];
             }
         }
-        dd($stok);
+        // dd($stok);
         $data = ['date'=>[],'stok'=>[]];
         foreach($stok as $stk){
 

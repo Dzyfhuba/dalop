@@ -50,34 +50,33 @@ class RekapDataProdukController extends Controller
 
 
         $data_produk_harian = DataProdukHarian::where('date', '=', $date)
+        // ->and_where("produk.id_produk","=","produk.id_produk")
             ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
             ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
             ->select(
-                'data_produk_harians.id as id',
                 'produks.nama_produk as produk',
                 'date',
                 DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
                 DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
             )
-            ->groupBy('produk', 'data_produk_harians.id')->get();
+            ->groupBy('produk', 'data_produk_harians.date')->get();
 
 
         $data_produk_bulanan = DataProdukHarian::whereBetween('date', [$first_date, $end_date])
             ->join('produk_varians', 'data_produk_harians.id_produk_varian', '=', 'produk_varians.id')
             ->join('produks', 'produk_varians.id_produk', '=', 'produks.id')
             ->select(
-                'data_produk_harians.id as id',
+        
                 'produks.nama_produk as produk',
-                'date',
+                
                 DB::raw('SUM(data_produk_harians.nilai_rencana) as nilai_rencana'),
                 DB::raw('SUM(data_produk_harians.nilai_realisasi) as nilai_realisasi')
             )
-            ->groupBy('produk', 'data_produk_harians.id')
+            ->groupBy('produk')
             ->get();
 
         // dd($data_produk_bulanan);
 
         return view('rekap_data.index', compact('data_produk_harian', 'date','data_produk_bulanan','first_date','end_date'));
-        
     }
 }

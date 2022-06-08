@@ -38,5 +38,21 @@
 
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('template/build/js/custom.js')}}"></script>
-
+<!-- DataTables -->
+<script src="{{ asset('js/DataTables/datatables.js')}}'"></script>
+<script src="{{ asset('js/DataTables/datatables.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/jquery.dataTables.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/moment.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/dataTables.dateTime.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/dataTables.buttons.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/jszip.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/pdfmake.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/vfs_fonts.js')}}'"></script>
+<script src="{{ asset('js/DataTables/buttons.html5.min.js')}}'"></script>
+<script src="{{ asset('js/DataTables/buttons.print.min.js')}}'"></script>
+<script src="{{ asset('js/Datejs/build/date.js')}}'"></script>
+<script src="{{ asset('js/Viewer/dist/viewer.common.js')}}'"></script>
+<script src="{{ asset('js/Viewer/dist/viewer.esm.js')}}'"></script>
+<script src="{{ asset('js/Viewer/dist/viewer.js')}}'"></script>
+<script src="{{ asset('js/Viewer/dist/viewer.min.js')}}'"></script>
 

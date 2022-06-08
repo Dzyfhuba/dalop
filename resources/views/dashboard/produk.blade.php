@@ -281,7 +281,7 @@
         labels.forEach((l, idx) => {
          let nil = 0;
          if (tt['nilai_realisasi'][idx] != 0 && tt['nilai_rencana'][idx] != 0) {
-            nil = parseFloat(tt['nilai_realisasi'][idx]) / parseFloat(tt['nilai_rencana'][idx]) * 10000000
+            nil = parseFloat(tt['nilai_realisasi'][idx]) / parseFloat(tt['nilai_rencana'][idx]) * (100)
          }
          lb.push(l + " \n " + parseFloat(nil).toFixed(2) + "%")
       });

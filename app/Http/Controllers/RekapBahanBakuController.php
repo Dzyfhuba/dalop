@@ -10,10 +10,10 @@ class RekapBahanBakuController extends Controller
     //
     public function index(Request $request){
         // $stokbahanbakuharian = StokBahanBakuHarian::
-        $date = $request->date ?? date('y-m-d');
+        $date = $request->date ?? date('Y-m-d');
 
         $stock = StokBahanBakuHarian::where('date','=',$date)->get();
-        // dd($stock[0]->bahan_baku);
+        // dd($stock);
         return view('rekap_bahan_baku.index',compact('stock','date'));
     }
     

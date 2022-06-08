@@ -15,3 +15,8 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('template/build/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/DataTables/datatables.css')}}" rel="stylesheet">
+   <link href="{{ asset('js/DataTables/datatables.min.css')}}" rel="stylesheet">
+   <link href="{{ asset('js/DataTables/buttons.dataTables.min.css')}}" rel="stylesheet">
+   <link href="{{ asset('js/DataTables/dataTables.dateTime.min.css')}}" rel="stylesheet">
+   <link href="{{ asset('js/DataTables/jquery.dataTables.min.css')}}" rel="stylesheet">
