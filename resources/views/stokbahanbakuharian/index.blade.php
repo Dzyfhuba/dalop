@@ -19,13 +19,13 @@
                         <div>
                             <form action="">
 
-                                <input type="date" name="first_date" value="{{request()->first_date ?? $first_date}}">
-                                <input type="date" name="end_date" value="{{request()->end_date ?? $end_date}}">
+                                <input type="date" name="first_date" value="{{ request()->first_date ?? $first_date }}">
+                                <input type="date" name="end_date" value="{{ request()->end_date ?? $end_date }}">
                                 <button type="submit">Cari</button>
                             </form>
                         </div>
 
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tabel_stok_bahan_baku">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -46,7 +46,7 @@
                                         @endforeach
 
                                         <td><a type="button" class="btn btn-warning btn-xs"
-                                                href={{ route('stokbahanbakuharian.edit', ['date' => $i]) }}>Edit 
+                                                href={{ route('stokbahanbakuharian.edit', ['date' => $i]) }}>Edit
                                                 <span class="glyphicon glyphicon-edit"></span></a>
 
                                             <a type="button" class="btn btn-danger btn-xs"
@@ -70,15 +70,15 @@
                                                     class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                     </tr>
-                                    
+
                                 @endforeach --}}
                             </tbody>
-                            </table>
-                            <div>
-                              
-                                {{-- {{ $bb->links() }} --}}
+                        </table>
+                        <div>
 
-                            </div>
+                            {{-- {{ $bb->links() }} --}}
+
+                        </div>
                         <div>
                         </div>
                     </div>
@@ -86,4 +86,9 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#tabel_stok_bahan_baku').DataTable();
+        });
+    </script>
 @endsection
