@@ -18,8 +18,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard/produk');
+Route::get('/', function () {
+    return view('home');
 });
 Auth::routes();
 Route::get('/dashboard/produk', [App\Http\Controllers\DashboardController::class, 'produk'])->name('dashboard.produk');
@@ -102,5 +102,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/rekapdataproduk', [App\Http\Controllers\RekapDataProdukController::class, 'index'])->name('rekapdataproduk');
     Route::get('/rekapdataprodukvarian', [App\Http\Controllers\RekapDataProdukVarianController::class, 'index'])->name('rekapdataprodukvarian');
     Route::get('/rekapdatabahanbaku', [App\Http\Controllers\RekapBahanBakuController::class, 'index'])->name('rekapdatabahanbaku');
-
 });
