@@ -8,6 +8,7 @@
     <title>Sistem monitoring bahan baku dan produk PT. Petrokimia Gresik | </title>
 
     <!-- Bootstrap -->
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     @include('_includes.css')
-
 </head>
