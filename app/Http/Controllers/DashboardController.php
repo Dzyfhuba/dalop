@@ -158,10 +158,17 @@ class DashboardController extends Controller
 
         $produk_varian_pertahun = $datasets;
         // dd($prog_per_tahun);
+            // dd($ppb);
         $ppb = 0;
         if ($prog_per_bulan['realisasi'] != 0 && $prog_per_bulan['rencana'] != 0) {
             $ppb = $prog_per_bulan['realisasi'] / $prog_per_bulan['rencana'] * 100/1;
             // dd($ppb);
+            $ppbs = $prog_per_bulan_sd['realisasi'] / $prog_per_bulan_sd['rencana'] * 100/1;
+            echo 'ppbs'.$ppbs;
+            $ppt = $prog_per_tahun['realisasi'] / $prog_per_tahun['rencana'] * 100/1;
+            dd($ppb,$ppbs,$ppt);
+            
+            
         }
 
         $ppbs = 0;

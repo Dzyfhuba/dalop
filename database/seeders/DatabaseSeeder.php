@@ -343,7 +343,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $begin = new DateTime ('2021-01-01');
-        $end = new DateTime('2024-01-01');
+        $end = new DateTime('2023-01-01');
 
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end);
